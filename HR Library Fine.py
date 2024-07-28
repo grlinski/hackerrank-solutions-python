@@ -1,41 +1,36 @@
 
 # Library Fine
-# https://www.hackerrank.com/challenges/library-fine/problem
-
-def libraryFine(d1, m1, y1, d2, m2, y2):
-    dd = d2-d1
-    md = m2-m1
-    yd = y2-y1
+#
 
 
-    tm = 0
+# Completed
 
-    if yd == 0:
-        pass
-    else:
-        tm = (yd*12)-md
-        return tm*500+dd*
+import datetime
 
+rDay,rMonth,rYear = map(int, input().split(' '))
+dDay,dMonth,dYear = map(int, input().split(' '))
 
 
+diffDay = rDay-dDay
+diffMonth = rMonth-dMonth
+diffYear = rYear-dYear
 
-    print(dd,md,yd)
+total = 0
+if diffYear > 0:
+    total = 10000
+elif diffYear <0:
+    total = 0
+elif diffMonth > 0:
+    total = diffMonth*500
+elif diffMonth < 0:
+    total = 0
+elif diffDay > 0:
+    total = diffDay*15
 
-
-
-
-
-
-
-
-
-d1,m1,y1 = 9,6,2015
-d2,m2,y2 = 6,6,2015
+print(total)
 
 
 
-
-libraryFine(d1, m1, y1, d2, m2, y2)
 
 
 

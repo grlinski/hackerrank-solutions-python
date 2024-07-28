@@ -1,56 +1,53 @@
 
 
-
 # The Grid Search
 # https://www.hackerrank.com/challenges/the-grid-search/problem
 
-def gridSearch(g, p):
-    gr = len(g)
-    gc = len(g[0])
 
-    pr = len(p)
-    pc = len(g[0])
-
-    fs = p[0]
-
-    contains = False
+def printGrid(x):
+    for i in x:
+        print(i)
 
 
-    for i in range(0,gc):
 
 
-        if i+pr > gc-1:
-            break
+def createGrid(grid,r,c,startC,startR):
+    newgrid = []
+    startC-=1
+    print('ROW',startR,startR+r)
+    print('COL',startC,startC+c)
 
-        for j in range(0,gr):
+    for i in range(startR,startR+r):
+        y = ''
+        z = ''
+        for j in range(startC,startC+c):
+            x = str(grid[i])
+            y = y+ x[1:-1]
+            z+=y[j]
+        newgrid.append(int(z))
 
-            if j+len(fs) > gr:
-                break
-            s = g[i][j:j+len(fs)]
-            #print(s)
-            if s == fs:
-
-                contains = True
-                for n in range(0,pr):
-                    px = p[n]
-                    try:
-                        gx = g[i+n][j:j+len(fs)]
-                    except:
-                        contains = False
-                        break
-
-                    if px == gx:
-                        pass
-                    else:
-                        contains = False
-                if contains == True:
-                    return 'YES'
+    return newgrid
 
 
-    if contains == True:
-        return('YES')
-    else:
-        return('NO')
+def compareGrids(ng,item):
+    if len(ng)!= len(item):
+        return False
+
+    for i in range(0,len(ng)):
+        print(str(ng[i]), str(item[i]))
+
+
+
+def finder(grid,item,itemR,itemC):
+
+    itemhold = str(item[0])
+    item1 = itemhold[1:-1]
+    for i in range(0,len(grid)):
+        stringer = str(grid[i])
+        if item1 in stringer:
+            index = stringer.find(item1)
+            ng = createGrid(grid,r,c,index,i)
+            compareGrids(ng,item)
 
 
 
@@ -60,21 +57,34 @@ def gridSearch(g, p):
 
 
 
-t = int(input())
 
-for i in range(t):
+
+
+
+
+cases = int(input())
+
+for i in range(cases):
     r,c = map(int, input().split(' '))
-    g = []
+    grid =[]
     for j in range(r):
-        s = input()
-        g.append(s)
-    r, c = map(int, input().split(' '))
-    p = []
-    for j in range(r):
-        s = input()
-        p.append(s)
+        x = list(map(int, input().strip().split(' ')))
+        grid.append(x)
 
-    print(gridSearch(g,p))
+    r, c = map(int, input().split(' '))
+    item = []
+    for j in range(r):
+        x = list(map(int, input().strip().split(' ')))
+        item.append(x)
+
+    finder(grid,item,r,c)
+
+
+
+
+
+
+
 
 
 
